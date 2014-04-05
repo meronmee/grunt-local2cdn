@@ -1,0 +1,35 @@
+<%- include top %>
+<style>
+      body {
+        background-image: url('foo.jpg');
+        background-image: url("foo.jpg");
+        background-image: url(foo.jpg);
+        background-image: url('/foo.png');
+        background-image: url('bar/foo.png');
+        
+        background-image: url('http://demo.com/bar/foo.png');
+        background-image: url('../foo.gif');
+        background-image: url('foo/bar.jpg');
+        background-image: url('data:gif; base64XQTRTWEQW');
+      }
+    </style>
+    <!-- Bootstrap Core-->
+    <link href="/libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+  </head>
+  
+  <body>
+    <h1>Hello</h1>
+    <img something src="foo.jpg" data-hiya data-food="crimson">
+
+    <img src=foo/lala.png yo="what" />
+    <%
+        var str = '<img src="foo.png" yo="what" />';
+    %>
+    <img src="/foo.gif" something=blah  > :)
+    <img src="http://demo.com/bar/foo.png" something=blah  >
+    <img src="bar/foo.png" something=blah  >
+
+    <!-- jquery.js -->
+    <script src="/libs/jquery.js"></script>
+	<script src="/libs/bootstrap/js/bootstrap.js"></script>
+<%- include bottom %>

@@ -1,0 +1,12 @@
+body {
+        background-image: url('http://cdn.bootcss.com/xxx/foo.jpg');
+        background-image: url("http://cdn.bootcss.com/xxx/foo.jpg");
+        background-image: url(http://cdn.bootcss.com/xxx/foo.jpg);
+        background-image: url('http://cdn.bootcss.com/xxx/foo.png');
+        background-image: url('http://cdn.bootcss.com/xxx/foo.png');
+        
+        background-image: url('http://demo.com/bar/foo.png');
+        background-image: url('http://cdn.bootcss.com/xxx/foo.gif');
+        background-image: url('foo/bar.jpg');
+        background-image: url('data:gif; base64XQTRTWEQW');
+}

@@ -1,0 +1,46 @@
+{
+  "name": "grunt-local2cdn",
+  "description": "Converts local URLs to CDN ones.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/meronmee/grunt-local2cdn",
+  "author": {
+    "name": "meronmee",
+    "email": "meronmee@163.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/meronmee/grunt-local2cdn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/meronmee/grunt-local2cdn/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/meronmee/grunt-local2cdn/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.2",
+    "soup": "~0.0.8",
+    "css-url-rewriter": "0.0.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2",
+    "soup": "~0.0.8",
+    "css-url-rewriter": "0.0.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
