@@ -106,6 +106,31 @@ Whether local url in `options.maps` supports RegExp or not.
 If `true`, the final RegExp used to match will be `new RegExp(localUrl, 'ig')`;
 If `false`, the final RegExp used to match will be `new RegExp(escapeRegExChars(localUrl)+'\\s*$', 'ig')`;
 
+The plugin will stop searching in `options.maps` as long as it find a match.
+When `options.regex==false`, if the localUrl in a map is the tail of the original url, it will matchs. So, you must take care of the situation:
+```js
+maps:{
+  ...
+  'bootstrap.css': 'http://cdn.example.com/bootstrap.min.css',
+  ...  
+  'typeahead.bootstrap.css': 'http://cdn.example.com/typeahead.bootstrap.min.css',
+  ...
+}
+```
+
+```html
+  ...
+  <link href="/libs/typeahead/typeahead.bootstrap.css" rel="stylesheet">
+  ...
+```
+
+The original url will match `bootstrap.css` incorrectly, not the correct one `typeahead.bootstrap.css`. To avoid this, there are some solutions:
+
+- put the `typeahead.bootstrap.css` map before the `bootstrap.css` map;
+- change the maps to `/bootstrap.css` and `/typeahead.bootstrap.css`;
+- set `options.regex` to `true`, and change the localUrls to customed regex formats;
+
+
 It can be overwrote in `options.maps`.
 
 #### options.separator
@@ -299,4 +324,4 @@ and the dest file `'test/dist/sample.html'` will like:
 - jsdelivr: [http://www.jsdelivr.com/](http://www.jsdelivr.com/)
 
 ## Release History
-* 2014-04-05    v0.1.0
+* 2014-04-05    v0.1.2
