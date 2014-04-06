@@ -13,7 +13,7 @@ The task looks through your specified files for URLs to modify, in the following
 - `<link rel="stylesheet" href="____">`
 - `background-image: url(____); in your CSS (including inside <style> tags in your HTML)`
 
-It will ignore web urls and image in data URI format, e.g. `http://www.example.com/foo.png`, `data:image/png;base64,iVBORw0KGgoAAAANS...` 
+It will ignore web urls and images with data URI format, e.g. `http://www.example.com/foo.png`, `data:image/png;base64,iVBORw0KGgoAAAANS...` 
 
 ## Getting Started
 This plugin requires Grunt `~0.4.0`
@@ -112,15 +112,23 @@ It can be overwrote in `options.maps`.
 Type: `[Optional]String`
 Default value: `':'`
 
-This plugin needs to know the source type`(image,css,js)` of each url. It will guess the source type from local url or CDN url by the source file extension. e.g.: 
+The plugin needs to know the source type`(image,css,js)` of each url. It will detect the source type from local url or CDN url by the source file extension. e.g.: 
 
 `'jquery.js': 'jquery/2.0.3/jquery.min.js'` --> srcType will be 'js';
 
 `'bootstrap.css': '/bootstrap/3.1.1/css/bootstrap.min.css'`  --> srcType will be 'css';
 
-`'foo.png': '/xxx/foo.png'` --> srcType will be 'image', the supported image types are:`'png','gif','jpeg','jpg','ico','bmp','svg'`
+`'foo.png': '/xxx/foo.png'` --> srcType will be 'image', the plugin can detect source type from these image types:`'png','gif','jpeg','jpg','ico','bmp','svg'`
 
-If the map is: `'foo.tif': '/xxx/foo.tif'`, this plugin cannot guess out the source type, and then you need to explicitly specify the source type of this  resource, append separator and type to the end of CDN url, that is `'foo.tif': '/xxx/foo.tif:image'`, it will works as an image url.
+If there is a map: `'foo.tif': '/xxx/foo.tif'`, the plugin cannot detect the source type, and then you need to explicitly specify the source type of this  resource, juest append separator and the type to the end of CDN url, that is `'foo.tif': '/xxx/foo.tif:image'`, it will works as an image url.
+
+The plugin detect source type in this order:
+CDN url affix(separator+type)  --> CDN url --> local url
+
+It will stop detecting as long as it got a valid type.
+
+When detecting, query and id locator will be ignored. e.g.:  
+`/xxx/foo.png?v=12345` will be treat as `/xxx/foo.png`
 
 It can be overwrote in `options.maps`.
 
@@ -152,9 +160,33 @@ options: {
 
 
 ### Usage Examples
-
 #### Example 1
-In this example, references contain strings in `options.form` in the src file `'test/src/formated.html'` will be replaced by `options.to: 'libs/libs.css(merged with options.prefix)'`, and the result will be saved to `dest:'test/dist/formated.html'`.
+
+```js
+local2cdn: {
+  main: {
+    options: {
+      maps: {
+        "/jquery.js": "http://libs.baidu.com/jquery/1.10.2/jquery.min.js",
+        "/bootbox.js": "http://cdn.staticfile.org/bootbox.js/4.1.0/bootbox.min.js",
+        "/bootstrap.js": "http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js",
+        "/bootstrap.css": "http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css",           
+        "/underscore.js": "http://cdn.staticfile.org/underscore.js/1.5.2/underscore-min.js"
+      }
+    },
+    files: [
+      {
+        expand: true,
+        cwd: 'test/src/',
+        src: '**/*.{css,html,ejs}',
+        dest: 'test/dist/'
+      }
+    ]
+  }
+}
+```
+
+#### Example 2
 
 ```js
 grunt.initConfig({
