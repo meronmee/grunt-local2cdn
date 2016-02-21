@@ -36,7 +36,7 @@
     "css-url-rewriter": "0.0.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4.2",
+    "grunt": ">=0.4.0",
     "soup": "~0.0.8",
     "css-url-rewriter": "0.0.1"
   },
